@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react"
+import { ChangeEvent, useRef, useState } from "react"
 
 type Seconds = number
 type Milliseconds = number
@@ -11,6 +11,7 @@ export default function WpmGame() {
 	const [timePassed, setTimePassed] = useState<Seconds>(0)
 	const [wpm, setWpm] = useState<Wpm>(0)
 	const [isFinished, setIsFinished] = useState(false)
+	const inputElement = useRef<HTMLInputElement>(null)
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const currentTime: Milliseconds = new Date().getTime()
@@ -46,13 +47,14 @@ export default function WpmGame() {
 
 	return (
 		<div>
-			<p>{ quote }</p>
+			<p onClick={() => inputElement.current?.focus() }>{ quote }</p>
 
 			<input
-				className="bg-black text-white focus:outline-none"
+				className="bg-black text-white focus:outline-none absolute -z-50 w-0 h-0"
 				type="text"
 				value={input}
 				onChange={handleChange}
+				ref={inputElement}
 			/>
 
 			<p>Time passed: { timePassed }</p>
