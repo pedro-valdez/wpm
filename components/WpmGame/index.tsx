@@ -1,6 +1,7 @@
-import { ChangeEvent, useReducer, useRef, useState } from "react"
-import gameReducer, { GAME_ACTIONS, initialGame } from "./gameReducer"
+import { useReducer, useRef, useState } from "react"
+import gameReducer, { initialGame } from "./gameReducer"
 import Quote from "./Quote"
+import GameInput from "./GameInput"
 
 
 export default function WpmGame() {
@@ -8,17 +9,12 @@ export default function WpmGame() {
 	const [game, gameDispatch] = useReducer(gameReducer, initialGame)
 	const inputElement = useRef<HTMLInputElement>(null)
 
-	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-		const currentText = e.currentTarget.value
-		setInput(currentText)
-
-		gameDispatch({ type: GAME_ACTIONS.PLAY, payload: { currentText } })
-	}
-
 	return (
 		<div>
 			<div
-				onClick={() => inputElement.current?.focus()}
+				onClick={
+					() => inputElement.current?.focus()
+				}
 			>
 				<Quote
 					quote={game.quote}
@@ -26,12 +22,11 @@ export default function WpmGame() {
 				/>
 			</div>
 
-			<input
-				className="bg-black text-white focus:outline-none absolute -z-50 w-0 h-0"
-				type="text"
-				value={input}
-				onChange={handleChange}
+			<GameInput
+				input={input}
+				setInput={setInput}
 				ref={inputElement}
+				gameDispatch={gameDispatch}
 			/>
 
 			<p>Time passed: { game.timePassed }</p>
