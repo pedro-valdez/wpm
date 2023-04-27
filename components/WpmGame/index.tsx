@@ -1,5 +1,6 @@
 import { ChangeEvent, useReducer, useRef, useState } from "react"
 import gameReducer, { GAME_ACTIONS, initialGame } from "./gameReducer"
+import Quote from "./Quote"
 
 
 export default function WpmGame() {
@@ -16,7 +17,7 @@ export default function WpmGame() {
 
 	return (
 		<div>
-			<p onClick={() => inputElement.current?.focus() }>{ game.quote }</p>
+			<Quote quote={game.quote} input={input}/>
 
 			<input
 				className="bg-black text-white focus:outline-none absolute -z-50 w-0 h-0"
