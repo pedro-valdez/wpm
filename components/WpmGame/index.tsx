@@ -17,7 +17,14 @@ export default function WpmGame() {
 
 	return (
 		<div>
-			<Quote quote={game.quote} input={input}/>
+			<div
+				onClick={() => inputElement.current?.focus()}
+			>
+				<Quote
+					quote={game.quote}
+					input={input}
+				/>
+			</div>
 
 			<input
 				className="bg-black text-white focus:outline-none absolute -z-50 w-0 h-0"
