@@ -1,5 +1,5 @@
 import { ChangeEvent, useReducer, useRef, useState } from "react"
-import gameReducer, { GAME_ACTIONS, Game, GameAction, initialGame } from "./gameReducer"
+import gameReducer, { GAME_ACTIONS, initialGame } from "./gameReducer"
 
 
 export default function WpmGame() {
