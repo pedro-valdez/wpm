@@ -1,14 +1,13 @@
-import { RefObject, ChangeEvent, Dispatch, SetStateAction } from "react"
+import { ChangeEvent, Dispatch, SetStateAction, forwardRef, ForwardedRef } from "react"
 import { GameAction, GAME_ACTIONS } from "./gameReducer"
 
 type GameInputProps = {
 	input: string,
-	ref: RefObject<HTMLInputElement>,
 	setInput: Dispatch<SetStateAction<string>>,
 	gameDispatch: Dispatch<GameAction>,
 }
 
-export default function GameInput({ input, setInput, ref, gameDispatch }: GameInputProps) {
+const GameInput = forwardRef(function( { input, setInput, gameDispatch }: GameInputProps, ref: ForwardedRef<HTMLInputElement>) {
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const currentText = e.currentTarget.value
 		setInput(currentText)
@@ -25,4 +24,6 @@ export default function GameInput({ input, setInput, ref, gameDispatch }: GameIn
 			ref={ref}
 		/>
 	)
-}
+})
+
+export default GameInput
