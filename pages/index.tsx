@@ -1,10 +1,25 @@
-import WpmGame from "@/components/WpmGame";
+import WpmGame from "@/components/WpmGame"
+import { readFileSync } from "fs"
 
-export default function Home() {
+type HomeProps = {
+	quote: string
+}
+
+export async function getStaticProps() {
+	const quotes = JSON.parse(readFileSync("lib/quotes.json").toString()).quotes
+	const quote = quotes[Math.floor(Math.random() * quotes.length)]
+	return {
+		props: {
+			quote
+		},
+	}
+}
+
+export default function Home({ quote }: HomeProps) {
   return (
 		<div className="h-screen flex justify-center items-center">
 			<div className="max-w-xl">
-				<WpmGame />
+				<WpmGame quote={quote}/>
 			</div>
 		</div>
   )

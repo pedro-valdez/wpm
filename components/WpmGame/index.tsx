@@ -3,10 +3,13 @@ import gameReducer, { initialGame } from "./gameReducer"
 import Quote from "./Quote"
 import GameInput from "./GameInput"
 
+type GameProps = {
+	quote: string,
+}
 
-export default function WpmGame() {
+export default function WpmGame({ quote }: GameProps) {
 	const [input, setInput] = useState("")
-	const [game, gameDispatch] = useReducer(gameReducer, initialGame)
+	const [game, gameDispatch] = useReducer(gameReducer, { ...initialGame, quote })
 	const inputElement = useRef<HTMLInputElement>(null)
 
 	return (
