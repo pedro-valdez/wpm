@@ -2,6 +2,7 @@ import { useReducer, useRef, useState } from "react"
 import gameReducer, { initialGame } from "./gameReducer"
 import Quote from "./Quote"
 import GameInput from "./GameInput"
+import Result from "./Result"
 
 type GameProps = {
 	quote: string,
@@ -32,8 +33,7 @@ export default function WpmGame({ quote }: GameProps) {
 				gameDispatch={gameDispatch}
 			/>
 
-			<p>Time passed: { game.timePassed }</p>
-			<p>WPM is: { game.wpm }</p>
+			<Result game={game}/>
 		</div>
 	)
 }
