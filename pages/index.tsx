@@ -1,5 +1,10 @@
 import WpmGame from "@/components/WpmGame"
 import { readFileSync } from "fs"
+import { Inter } from "next/font/google"
+
+const inter = Inter({
+	subsets: ['latin'],
+})
 
 type HomeProps = {
 	quote: string
@@ -17,10 +22,10 @@ export async function getStaticProps() {
 
 export default function Home({ quote }: HomeProps) {
   return (
-		<div className="h-screen flex justify-center items-center">
-			<div className="max-w-xl">
+		<main className={inter.className}>
+			<div>
 				<WpmGame quote={quote}/>
 			</div>
-		</div>
+		</main>
   )
 }

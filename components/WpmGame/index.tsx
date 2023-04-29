@@ -14,26 +14,28 @@ export default function WpmGame({ quote }: GameProps) {
 	const inputElement = useRef<HTMLInputElement>(null)
 
 	return (
-		<div>
-			<div
-				onClick={
-					() => inputElement.current?.focus()
-				}
-			>
-				<Quote
-					quote={game.quote}
+		<div className="h-screen flex justify-center items-center">
+			<div className="max-w-md p-4">
+				<div
+					onClick={
+						() => inputElement.current?.focus()
+					}
+				>
+					<Quote
+						quote={game.quote}
+						input={input}
+					/>
+				</div>
+
+				<GameInput
 					input={input}
+					setInput={setInput}
+					ref={inputElement}
+					gameDispatch={gameDispatch}
 				/>
+
+				<Result game={game}/>
 			</div>
-
-			<GameInput
-				input={input}
-				setInput={setInput}
-				ref={inputElement}
-				gameDispatch={gameDispatch}
-			/>
-
-			<Result game={game}/>
 		</div>
 	)
 }

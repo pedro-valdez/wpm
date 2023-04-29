@@ -32,7 +32,7 @@ export default function Quote({ quote, input }: QuoteProps) {
 	))
 
 	return (
-		<p>
+		<p className="font-black text-2xl md:text-3xl lg:text-4xl xl:text-5xl xl:leading-[3.25rem] 2xl:text-6xl 2xl:leading-[4rem]">
 			{ words }
 		</p>
 	)
