@@ -1,41 +1,23 @@
-import { useReducer, useRef, useState } from "react"
-import gameReducer, { initialGame } from "./gameReducer"
-import Quote from "./Quote"
-import GameInput from "./GameInput"
-import Result from "./Result"
+import useSWR from "swr"
+import Wpm from "./Wpm"
 
-type GameProps = {
-	quote: string,
+const fetcher = (...args) => fetch(...args).then(res => res.json())
+
+function useQuote() {
+	const { data, error } = useSWR("/api/quote/random", fetcher)
+
+	return {
+		quote: data,
+		isError: error,
+		isLoading: !data && !error,
+	}
 }
 
-export default function WpmGame({ quote }: GameProps) {
-	const [input, setInput] = useState("")
-	const [game, gameDispatch] = useReducer(gameReducer, { ...initialGame, quote })
-	const inputElement = useRef<HTMLInputElement>(null)
+export default function WpmGame() {
+	const { quote, isError, isLoading } = useQuote()
 
-	return (
-		<div className="h-screen flex justify-center items-center">
-			<div className="max-w-md p-4">
-				<div
-					onClick={
-						() => inputElement.current?.focus()
-					}
-				>
-					<Quote
-						quote={game.quote}
-						input={input}
-					/>
-				</div>
+	if (isError) { return <>Error</> }
+	if (isLoading) { return <>Loading</> }
 
-				<GameInput
-					input={input}
-					setInput={setInput}
-					ref={inputElement}
-					gameDispatch={gameDispatch}
-				/>
-
-				<Result game={game}/>
-			</div>
-		</div>
-	)
+	return <Wpm quote={quote.data.quote.trimRight()}/>
 }
