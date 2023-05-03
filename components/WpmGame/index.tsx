@@ -1,13 +1,18 @@
 import useSWR from "swr"
 import Wpm from "./Wpm"
 
-const fetcher = (...args) => fetch(...args).then(res => res.json())
+const getRandomQuote = async (url: string) => {
+	const resp = await fetch(url)
+	const data = await resp.json()
+
+	return { ...data.data }
+}
 
 function useQuote() {
-	const { data, error } = useSWR("/api/quote/random", fetcher)
+	const { data, error } = useSWR("/api/quote/random", getRandomQuote)
 
 	return {
-		quote: data,
+		...data,
 		isError: error,
 		isLoading: !data && !error,
 	}
@@ -19,5 +24,5 @@ export default function WpmGame() {
 	if (isError) { return <>Error</> }
 	if (isLoading) { return <>Loading</> }
 
-	return <Wpm quote={quote.data.quote.trimRight()}/>
+	return <Wpm quote={quote.trimEnd()}/>
 }
