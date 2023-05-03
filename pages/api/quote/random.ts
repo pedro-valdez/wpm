@@ -7,7 +7,7 @@ function chooseRandom(arr: string[]) {
 }
 
 function chooseAuthor() {
-	const quotesPath = path.join(process.cwd(), "lib/quotes/")
+	const quotesPath = path.join(process.cwd(), "quotes/")
 	const authors = readdirSync(quotesPath)
 	const author = chooseRandom(authors)
 	const authorPath = path.join(quotesPath, author, "/")
