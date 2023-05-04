@@ -8,7 +8,7 @@ const inter = Inter({
 export default function Home() {
   return (
 		<main className={inter.className}>
-			<div>
+			<div className="h-screen flex justify-center items-center">
 				<WpmGame />
 			</div>
 		</main>
