@@ -32,7 +32,6 @@ function play(game: Game, currentText: string): Game {
 	const currentTime: Milliseconds = new Date().getTime()
 
 	const isStarted = startTime !== 0
-	//if (!isStarted) { setStartTime(currentTime) }
 	if (!isStarted) { return { ...game, startTime: currentTime } }
 
 	const isPlaying = isStarted && !isFinished
@@ -49,9 +48,6 @@ function play(game: Game, currentText: string): Game {
 	const isAtLastWord = tokenizedQuote.length === tokenizedInput.length
 	const isLastCharacterEqual = quoteLastCharacter === inputLastCharacter
 	const isLastCharacterPressed = isAtLastWord && isLastCharacterEqual
-	//if (isLastCharacterPressed) {
-	//	setIsFinished(true)
-	//}
 	if (isLastCharacterPressed) {
 		return {
 			...game,
@@ -61,10 +57,6 @@ function play(game: Game, currentText: string): Game {
 		}
 	}
 
-	//if (isPlaying) {
-	//	setTimePassed(delta)
-	//	setWpm(currentWpm)
-	//}
 	if (isPlaying) {
 		return {
 			...game,

@@ -1,5 +1,5 @@
 import { useRef } from "react"
-import { Game } from "./gameReducer"
+import type { Game } from "./Game/reducer"
 
 type ResultProps = {
 	game: Game,

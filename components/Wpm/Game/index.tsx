@@ -1,14 +1,14 @@
 import { useReducer, useRef, useState } from "react"
-import gameReducer, { initialGame } from "./gameReducer"
-import Quote from "./Quote"
-import GameInput from "./GameInput"
-import Result from "./Result"
+import gameReducer, { initialGame } from "./reducer"
+import Quote from "../Quote"
+import GameInput from "./Input"
+import Result from "../Result"
 
 type WpmProps = {
 	quote: string,
 }
 
-export default function Wpm({ quote }: WpmProps) {
+export default function Game({ quote }: WpmProps) {
 	const [input, setInput] = useState("")
 	const [game, gameDispatch] = useReducer(gameReducer, { ...initialGame, quote })
 	const inputElement = useRef<HTMLInputElement>(null)

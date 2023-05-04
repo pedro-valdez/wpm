@@ -1,5 +1,5 @@
 import { ChangeEvent, Dispatch, SetStateAction, forwardRef, ForwardedRef } from "react"
-import { GameAction, GAME_ACTIONS } from "./gameReducer"
+import { GameAction, GAME_ACTIONS } from "./reducer"
 
 type GameInputProps = {
 	input: string,

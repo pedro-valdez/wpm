@@ -1,4 +1,4 @@
-import type { WordEvaluation, WordCorrectness } from "./Quote";
+import type { WordEvaluation, WordCorrectness } from "./";
 
 type WordProps = {
 	wordEvaluation: WordEvaluation
