@@ -11,7 +11,7 @@ export default function Result({ game }: ResultProps) {
 	if (!game.isFinished) { return null }
 
 	return (
-		<article ref={modal} className="mt-4">
+		<article ref={modal} className="mt-4 ml-4">
 			<div>
 				<h2 className="text-2xl font-bold text-primary">Results</h2>
 				<p className="font-bold">

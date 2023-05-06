@@ -14,7 +14,7 @@ export default function Game({ quote }: WpmProps) {
 	const inputElement = useRef<HTMLInputElement>(null)
 
 	return (
-		<div className="max-w-md p-4">
+		<div>
 			<div
 				onClick={
 					() => inputElement.current?.focus()
