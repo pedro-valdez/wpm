@@ -1,6 +1,5 @@
 import { useRef } from "react"
 import type { Game } from "../Game/reducer"
-import { useOpenModal } from "./hooks"
 
 type ResultProps = {
 	game: Game,
@@ -9,20 +8,15 @@ type ResultProps = {
 export default function Result({ game }: ResultProps) {
 	const modal = useRef<HTMLElement>(null)
 
-	useOpenModal(game, modal)
+	if (!game.isFinished) { return null }
 
 	return (
-		<article className="modal" ref={modal}>
-			<div className="modal-box">
-				<h2 className="text-2xl">These are your results!</h2>
-				<p>
-					wpm: { game.wpm }
+		<article ref={modal} className="mt-4">
+			<div>
+				<h2 className="text-2xl font-bold text-primary">Results</h2>
+				<p className="font-bold">
+					WPM: { game.wpm }
 				</p>
-				<div className="modal-action">
-					<button onClick={() => modal.current?.classList.toggle("modal-open")}>
-						Close
-					</button>
-				</div>
 			</div>
 		</article>
 	)
