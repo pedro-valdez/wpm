@@ -17,7 +17,7 @@ const GameInput = forwardRef(function( { input, setInput, gameDispatch }: GameIn
 
 	return (
 		<input
-			className="bg-black text-white focus:outline-none absolute -z-50 w-0 h-0"
+			className="bg-black text-white focus:outline-none fixed -z-50 w-0 h-0 top-0 left-0"
 			type="text"
 			value={input}
 			onChange={handleChange}
