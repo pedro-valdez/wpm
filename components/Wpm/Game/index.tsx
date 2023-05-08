@@ -1,4 +1,4 @@
-import { useReducer, useRef, useState } from "react"
+import { useEffect, useReducer, useRef, useState } from "react"
 import gameReducer, { initialGame } from "./reducer"
 import Quote from "../Quote"
 import GameInput from "./Input"
@@ -12,6 +12,10 @@ export default function Game({ quote }: WpmProps) {
 	const [input, setInput] = useState("")
 	const [game, gameDispatch] = useReducer(gameReducer, { ...initialGame, quote })
 	const inputElement = useRef<HTMLInputElement>(null)
+
+	useEffect(() => {
+		inputElement.current?.focus()
+	}, [])
 
 	return (
 		<div>
