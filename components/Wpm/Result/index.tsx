@@ -6,10 +6,8 @@ type ResultProps = {
 }
 
 export default function Result({ game }: ResultProps) {
-	if (!game.isFinished) { return null }
-
 	return (
-		<article className="p-4">
+		<article className={`p-4 ${ game.isFinished ? "visible" : "invisible" }`}>
 			<div>
 				<h2 className="text-2xl font-bold text-primary">Results</h2>
 				<p className="font-bold">
