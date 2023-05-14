@@ -2,6 +2,7 @@ import useSWRImmutable from "swr/immutable"
 import Game from "./Game"
 import QuoteError from "./Quote/Error"
 import QuoteLoading from "./Quote/Loading"
+import { useEffect } from "react"
 
 const getRandomQuote = async (url: string) => {
 	const resp = await fetch(url)
@@ -12,8 +13,6 @@ const getRandomQuote = async (url: string) => {
 
 function useQuote() {
 	const { data, error, isLoading, isValidating, mutate } = useSWRImmutable("/api/quote/random", getRandomQuote)
-
-	console.log(data)
 
 	return {
 		quote: {
@@ -29,8 +28,16 @@ function useQuote() {
 export default function WpmGame() {
 	const { quote } = useQuote()
 
+	useEffect(() => {
+		const handleChangeQuote = (event: KeyboardEvent) => {
+			if (event.key === "Escape") { quote.mutate() }
+		}
+		window.addEventListener("keydown", handleChangeQuote)
+		return () => window.removeEventListener("keydown", handleChangeQuote)
+	}, [])
+
 	if (quote.isError) { return <QuoteError /> }
-	if (quote.isLoading) { return <QuoteLoading /> }
+	if (quote.isLoading || quote.isValidating ) { return <QuoteLoading /> }
 
 	return <Game quote={quote.text.trimEnd()} />
 }
