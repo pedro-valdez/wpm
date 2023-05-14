@@ -11,20 +11,26 @@ const getRandomQuote = async (url: string) => {
 }
 
 function useQuote() {
-	const { data, error } = useSWRImmutable("/api/quote/random", getRandomQuote)
+	const { data, error, isLoading, isValidating, mutate } = useSWRImmutable("/api/quote/random", getRandomQuote)
+
+	console.log(data)
 
 	return {
-		...data,
-		isError: error,
-		isLoading: !data && !error,
+		quote: {
+			...data,
+			isError: error,
+			isLoading,
+			isValidating,
+			mutate,
+		},
 	}
 }
 
 export default function WpmGame() {
-	const { quote, isError, isLoading } = useQuote()
+	const { quote } = useQuote()
 
-	if (isError) { return <QuoteError /> }
-	if (isLoading) { return <QuoteLoading /> }
+	if (quote.isError) { return <QuoteError /> }
+	if (quote.isLoading) { return <QuoteLoading /> }
 
-	return <Game quote={quote.trimEnd()} />
+	return <Game quote={quote.text.trimEnd()} />
 }

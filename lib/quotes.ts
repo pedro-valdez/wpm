@@ -24,9 +24,9 @@ function readQuote(dirPath: string, work: string) {
 function chooseQuoteInBook(authorPath: string, book: string) {
 	const bookPath = path.join(authorPath, book, "/")
 	const quotesInBook = readdirSync(bookPath)
-	const quote = readQuote(bookPath, chooseRandom(quotesInBook))
+	const text = readQuote(bookPath, chooseRandom(quotesInBook))
 
-	return { quote, book }
+	return { text, book }
 }
 
 function chooseQuote(authorPath: string) {
@@ -36,9 +36,9 @@ function chooseQuote(authorPath: string) {
 	const isBook = !(work.substring(work.length - 4) === ".txt")
 	if (isBook) { return chooseQuoteInBook(authorPath, work) }
 
-	const quote = readQuote(authorPath, work)
+	const text = readQuote(authorPath, work)
 
-	return { quote, book: "" }
+	return { text, book: "" }
 }
 
 export function getQuote() {
