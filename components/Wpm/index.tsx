@@ -1,4 +1,4 @@
-import useSWR from "swr"
+import useSWRImmutable from "swr/immutable"
 import Game from "./Game"
 import QuoteError from "./Quote/Error"
 import QuoteLoading from "./Quote/Loading"
@@ -11,7 +11,7 @@ const getRandomQuote = async (url: string) => {
 }
 
 function useQuote() {
-	const { data, error } = useSWR("/api/quote/random", getRandomQuote)
+	const { data, error } = useSWRImmutable("/api/quote/random", getRandomQuote)
 
 	return {
 		...data,
