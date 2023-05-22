@@ -25,5 +25,6 @@ const GameInput = forwardRef(function( { input, setInput, gameDispatch }: GameIn
 		/>
 	)
 })
+GameInput.displayName = "GameInput"
 
 export default GameInput
