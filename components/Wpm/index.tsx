@@ -39,5 +39,5 @@ export default function WpmGame() {
 	if (quote.isError) { return <QuoteError /> }
 	if (quote.isLoading || quote.isValidating ) { return <QuoteLoading /> }
 
-	return <Game quote={quote.text.trimEnd()} />
+	return <Game quote={quote} />
 }

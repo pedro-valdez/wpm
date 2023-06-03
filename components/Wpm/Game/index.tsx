@@ -5,12 +5,12 @@ import GameInput from "./Input"
 import Result from "../Result"
 
 type WpmProps = {
-	quote: string,
+	quote: any,
 }
 
 export default function Game({ quote }: WpmProps) {
 	const [input, setInput] = useState("")
-	const [game, gameDispatch] = useReducer(gameReducer, { ...initialGame, quote })
+	const [game, gameDispatch] = useReducer(gameReducer, { ...initialGame, quote: quote.text.trimEnd() })
 	const inputElement = useRef<HTMLInputElement>(null)
 
 	useEffect(() => {
@@ -37,7 +37,7 @@ export default function Game({ quote }: WpmProps) {
 				gameDispatch={gameDispatch}
 			/>
 
-			<Result game={game}/>
+			<Result game={game} restart={quote.mutate}/>
 		</div>
 	)
 }
