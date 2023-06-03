@@ -46,8 +46,9 @@ function play(game: Game, currentText: string): Game {
 	const quoteLastCharacter = tokenizedQuote.at(-1)?.at(-1)
 	const inputLastCharacter = tokenizedInput.at(-1)?.at(-1)
 	const isAtLastWord = tokenizedQuote.length === tokenizedInput.length
+	const isAtLastCharacter = tokenizedQuote.at(-1)?.length === tokenizedInput.at(-1)?.length
 	const isLastCharacterEqual = quoteLastCharacter === inputLastCharacter
-	const isLastCharacterPressed = isAtLastWord && isLastCharacterEqual
+	const isLastCharacterPressed = isAtLastWord && isAtLastCharacter && isLastCharacterEqual
 	if (isLastCharacterPressed) {
 		return {
 			...game,
