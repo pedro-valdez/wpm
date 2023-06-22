@@ -5,7 +5,7 @@ type WordProps = {
 }
 
 export function correctnessColor(correctness: WordCorrectness): string {
-	const correct = "text-green-500"
+	const correct = "text-gray-500"
 	const incorrect = "text-red-500"
 	const undecided = "text-gray-500"
 	switch(correctness) {

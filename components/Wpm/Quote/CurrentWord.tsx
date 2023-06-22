@@ -11,7 +11,7 @@ type LetterEvaluation = {
 export function correctnessColor(correctness: boolean | null): string {
 	const correct = "text-green-500"
 	const incorrect = "text-red-500"
-	const undecided = ""
+	const undecided = "text-gray-400"
 	switch(correctness) {
 		case true: return correct
 		case null: return undecided
@@ -55,7 +55,7 @@ function evaluateLetters({ quoteWord, inputWord }: CurrentWordProps): LetterEval
 
 export default function CurrentWord({ quoteWord, inputWord }: CurrentWordProps) {
 	if (inputWord.length === 0) {
-		return <span>{ quoteWord + " " }</span>
+		return <span className={correctnessColor(null)}>{ quoteWord + " " }</span>
 	}
 
 	const letterEvaluations = evaluateLetters({ quoteWord, inputWord })
