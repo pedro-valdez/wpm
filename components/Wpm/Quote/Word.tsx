@@ -4,7 +4,7 @@ type WordProps = {
 	wordEvaluation: WordEvaluation
 }
 
-function correctnessColor(correctness: WordCorrectness): string {
+export function correctnessColor(correctness: WordCorrectness): string {
 	const correct = "text-green-500"
 	const incorrect = "text-red-500"
 	const undecided = "text-gray-500"
