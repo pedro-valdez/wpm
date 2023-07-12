@@ -63,8 +63,11 @@ export default function CurrentWord({ quoteWord, inputWord }: CurrentWordProps) 
 	return (
 		<span>
 			{
-				letterEvaluations.map( letterEvaluation => (
-					<span className={correctnessColor(letterEvaluation.correctness)}>
+				letterEvaluations.map((letterEvaluation, index) => (
+					<span
+						className={correctnessColor(letterEvaluation.correctness)}
+						key={index}
+					>
 						{ letterEvaluation.letter }
 					</span>
 				))
