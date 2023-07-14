@@ -37,7 +37,7 @@ export default function Game({ quote }: WpmProps) {
 				gameDispatch={gameDispatch}
 			/>
 
-			<Result game={game} restart={quote.mutate}/>
+			<Result game={game} restart={quote.mutate} author={quote.author}/>
 		</div>
 	)
 }

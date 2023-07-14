@@ -1,29 +1,28 @@
 import type { Game } from "../Game/reducer"
+import { HiArrowPath } from "react-icons/hi2"
 
 type ResultProps = {
 	game: Game,
 	restart: any,
+	author: string,
 }
 
-export default function Result({ game, restart }: ResultProps) {
+export default function Result({ game, restart, author }: ResultProps) {
 	return (
-		<article className="p-4 flex justify-between items-center">
-			<div>
-				<div className={game.isFinished ? "visible" : "invisible"}>
-					<h2 className="text-2xl font-bold text-primary">Results</h2>
-					<p className="font-bold">
-						WPM: { game.wpm }
-					</p>
-				</div>
+		<div className="px-4 mb-4 flex justify-end items-center gap-x-4">
+			<p className="grow text-gray-500">by <span className="font-bold">{ author }</span></p>
+			<div className={game.isFinished ? "visible" : "invisible"}>
+				<p className="text-gray-500 font-bold badge bg-base-200">
+					WPM: { game.wpm }
+				</p>
 			</div>
-
 			<button
 				onClick={() => restart()}
-				className="btn tooltip normal-case"
+				className="tooltip text-xl p-2 rounded-full text-gray-500 bg-base-200 hover:bg-base-300"
 				data-tip="Esc"
 			>
-				Try again
+				<HiArrowPath />
 			</button>
-		</article>
+		</div>
 	)
 }
