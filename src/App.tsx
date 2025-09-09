@@ -1,4 +1,4 @@
-import { atom, useAtom, useAtomValue } from 'jotai'
+import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai'
 import { zip } from 'lodash'
 import { generate } from 'random-words'
 import { cn } from './util'
@@ -74,7 +74,7 @@ function useTimer() {
         }
       }
     }, delay)
-  }, [isTimerRunning])
+  }, [isTimerRunning, elapsedTime])
 
   const stopTimer = useCallback(() => {
     setIsTimerRunning(false)
@@ -112,9 +112,10 @@ function useTimer() {
 
 function App() {
   const [userInput, setUserInput] = useAtom(userInputAtom)
+  const setPrompt = useSetAtom(promptAtom)
   const grades = useGrade()
   const { currentWordIndex, currentLetterIndex } = useAtomValue(currentIndices)
-  const { elapsedTime, startTimer, isTimerRunning, isTimerFinished } = useTimer()
+  const { elapsedTime, startTimer, resetTimer, isTimerRunning, isTimerFinished } = useTimer()
 
   return (
     <>
@@ -152,6 +153,17 @@ function App() {
       />
 
       <div>{Math.floor(elapsedTime / 1000)}</div>
+      <div>
+        <button
+          onClick={() => {
+            setUserInput('')
+            setPrompt(generate(100) as string[])
+            resetTimer()
+          }}
+        >
+          Reset
+        </button>
+      </div>
     </>
   )
 }
