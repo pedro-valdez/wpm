@@ -26,6 +26,7 @@ function useGrade() {
         target: promptLetter,
         value: userLetter,
         grade: shouldGrade ? promptLetter === userLetter : undefined,
+        overflow: promptLetter === undefined,
       }
     })
   )
@@ -50,7 +51,7 @@ function App() {
                   letter.grade === undefined && 'opacity-60'
                 )}
               >
-                {letter.target}
+                {letter.overflow ? letter.value : letter.target}
               </span>
             ))}
           </span>
