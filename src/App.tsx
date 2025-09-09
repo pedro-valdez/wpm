@@ -43,7 +43,13 @@ function App() {
         {grades.map((word, i) => (
           <span key={i} className="inline-block">
             {word.map((letter, j) => (
-              <span key={j} className={cn(letter.grade === false && 'text-red-500')}>
+              <span
+                key={j}
+                className={cn(
+                  letter.grade === false && 'text-red-500',
+                  letter.grade === undefined && 'opacity-60'
+                )}
+              >
                 {letter.target}
               </span>
             ))}
