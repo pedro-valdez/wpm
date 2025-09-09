@@ -2,6 +2,7 @@ import { atom, useAtom, useAtomValue } from 'jotai'
 import { zip } from 'lodash'
 import { generate } from 'random-words'
 import { cn } from './util'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 const promptAtom = atom(generate(100) as string[])
 const userInputAtom = atom('')
@@ -44,10 +45,76 @@ function useGrade() {
   return gradedLetters
 }
 
+function useTimer() {
+  const [elapsedTime, setElapsedTime] = useState(0)
+  const [isTimerRunning, setIsTimerRunning] = useState(false)
+  const [isTimerFinished, setIsTimerFinished] = useState(false)
+
+  const startTimeRef = useRef<number | null>(null)
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
+
+  const delay = 16
+  const endTime = 2_000
+
+  const startTimer = useCallback(() => {
+    if (isTimerRunning || elapsedTime !== 0) return
+
+    setIsTimerRunning(true)
+    startTimeRef.current = performance.now()
+
+    intervalRef.current = setInterval(() => {
+      if (startTimeRef.current !== null) {
+        const elapsed = performance.now() - startTimeRef.current
+
+        if (elapsed >= endTime) {
+          setElapsedTime(endTime)
+          stopTimer()
+        } else {
+          setElapsedTime(elapsed)
+        }
+      }
+    }, delay)
+  }, [isTimerRunning])
+
+  const stopTimer = useCallback(() => {
+    setIsTimerRunning(false)
+    setIsTimerFinished(true)
+
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current)
+      intervalRef.current = null
+    }
+
+    if (startTimeRef.current !== null) {
+      startTimeRef.current = null
+    }
+  }, [])
+
+  const resetTimer = useCallback(() => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current)
+      intervalRef.current = null
+    }
+    startTimeRef.current = null
+    setElapsedTime(0)
+    setIsTimerRunning(false)
+    setIsTimerFinished(false)
+  }, [])
+
+  useEffect(() => {
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current)
+    }
+  }, [])
+
+  return { elapsedTime, isTimerRunning, isTimerFinished, startTimer, stopTimer, resetTimer }
+}
+
 function App() {
   const [userInput, setUserInput] = useAtom(userInputAtom)
   const grades = useGrade()
   const { currentWordIndex, currentLetterIndex } = useAtomValue(currentIndices)
+  const { elapsedTime, startTimer, isTimerRunning, isTimerFinished } = useTimer()
 
   return (
     <>
@@ -72,7 +139,19 @@ function App() {
         ))}
       </p>
 
-      <input type="text" value={userInput} onChange={(e) => setUserInput(e.target.value)} />
+      <input
+        type="text"
+        value={userInput}
+        onChange={(e) => {
+          if (!isTimerRunning) {
+            startTimer()
+          }
+          setUserInput(e.target.value)
+        }}
+        disabled={isTimerFinished}
+      />
+
+      <div>{Math.floor(elapsedTime / 1000)}</div>
     </>
   )
 }
