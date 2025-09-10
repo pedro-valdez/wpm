@@ -54,7 +54,7 @@ function useTimer() {
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   const delay = 16
-  const endTime = 2_000
+  const endTime = 10_000
 
   const startTimer = useCallback(() => {
     if (isTimerRunning || elapsedTime !== 0) return
@@ -112,10 +112,24 @@ function useTimer() {
 
 function App() {
   const [userInput, setUserInput] = useAtom(userInputAtom)
+  const userWords = useAtomValue(userWordsAtom)
   const setPrompt = useSetAtom(promptAtom)
   const grades = useGrade()
   const { currentWordIndex, currentLetterIndex } = useAtomValue(currentIndices)
   const { elapsedTime, startTimer, resetTimer, isTimerRunning, isTimerFinished } = useTimer()
+
+  /*
+   * NOTE: The character counts DO NOT include spcaes.
+   * `rawWpm`, however, does. The character counts are used to calcualte
+   * accuracy, and spaces factor out of the accuracy calculation.
+   */
+  const rawWpm = elapsedTime !== 0 ? userInput.length / (5 * (elapsedTime / 60_000)) : 0
+  const correctCharacterCount = grades.reduce(
+    (acc, cur) => acc + cur.filter((v) => v.grade).length,
+    0
+  )
+  const characterCount = userWords.reduce((acc, cur) => acc + cur.length, 0)
+  const accuracy = characterCount !== 0 ? correctCharacterCount / characterCount : 0
 
   return (
     <>
@@ -163,6 +177,11 @@ function App() {
         >
           Reset
         </button>
+      </div>
+      <div>
+        <p>Raw wpm: {Math.round(rawWpm)}</p>
+        <p>Accuracy: {accuracy}</p>
+        <p>WPM: {Math.round(rawWpm * accuracy)}</p>
       </div>
     </>
   )
