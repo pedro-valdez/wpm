@@ -18,6 +18,20 @@ export function useGameTimerControls() {
 
   const delay = 16
 
+  const stopTimer = useCallback(() => {
+    setIsTimerRunning(false)
+    setIsTimerFinished(true)
+
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current)
+      intervalRef.current = null
+    }
+
+    if (startTimeRef.current !== null) {
+      startTimeRef.current = null
+    }
+  }, [setIsTimerFinished, setIsTimerRunning])
+
   const startTimer = useCallback(() => {
     if (isTimerRunning || elapsedTime !== 0) return
 
@@ -36,21 +50,7 @@ export function useGameTimerControls() {
         }
       }
     }, delay)
-  }, [isTimerRunning, elapsedTime])
-
-  const stopTimer = useCallback(() => {
-    setIsTimerRunning(false)
-    setIsTimerFinished(true)
-
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current)
-      intervalRef.current = null
-    }
-
-    if (startTimeRef.current !== null) {
-      startTimeRef.current = null
-    }
-  }, [])
+  }, [isTimerRunning, elapsedTime, timerDuration, setElapsedTime, setIsTimerRunning, stopTimer])
 
   const resetTimer = useCallback(() => {
     if (intervalRef.current) {
@@ -61,7 +61,7 @@ export function useGameTimerControls() {
     setElapsedTime(0)
     setIsTimerRunning(false)
     setIsTimerFinished(false)
-  }, [])
+  }, [setElapsedTime, setIsTimerRunning, setIsTimerFinished])
 
   useEffect(() => {
     return () => {
