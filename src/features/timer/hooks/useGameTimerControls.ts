@@ -1,4 +1,4 @@
-import { useAtom } from 'jotai'
+import { useAtom, useAtomValue, useSetAtom } from 'jotai'
 import { createRef, useCallback, useEffect } from 'react'
 import {
   elapsedTimeAtom,
@@ -6,8 +6,6 @@ import {
   isTimerRunningAtom,
   timerDurationAtom,
 } from '../atoms'
-import { useSetAtom } from 'jotai'
-import { useAtomValue } from 'jotai'
 
 const startTimeRef = createRef<number | null>()
 const intervalRef = createRef<ReturnType<typeof setInterval> | null>()
