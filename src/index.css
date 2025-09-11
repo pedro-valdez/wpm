@@ -1,2 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
+
 @import 'tailwindcss';
 @plugin "daisyui";
+
+@theme {
+  --font-inconsolata: 'Inconsolata', monospace;
+}
+
+body {
+  @apply font-inconsolata;
+}
