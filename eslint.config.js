@@ -21,5 +21,44 @@ export default tseslint.config([
       globals: globals.browser,
     },
   },
+  {
+    files: ['src/features/**/*.{ts,tsx}'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['@/features/**/*', '!@features/*/index.ts'],
+              message: 'Cross-feature imports restricted.',
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    files: ['src/features/game/**/*.{ts,tsx}'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: [
+                '@/features/**/*',
+                '!@/features/*/index.ts',
+                '!@/features/prompt/',
+                '!@/features/timer/',
+                '!@/features/prompt/**',
+                '!@/features/timer/**',
+              ],
+              message: 'Cross-feature imports restricted, except for prompt and timer.',
+            },
+          ],
+        },
+      ],
+    },
+  },
   eslintPluginPrettierRecommended,
 ])
