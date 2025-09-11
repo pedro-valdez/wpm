@@ -1,3 +1,3 @@
 export { GameResults } from './Results'
 export { GameResetButton } from './ResetButton'
-export { GameUserInput } from './UserInput'
+export { GamePrompt } from './Prompt'
