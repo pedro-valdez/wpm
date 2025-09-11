@@ -1,12 +1,12 @@
-import { GameTimer } from '@/features/timer/components'
-import { Prompt, UserInput } from '@/features/prompt/components'
-import { GameResetButton, GameResults } from '@/features/game/components'
+import { GameResetButton, GameResults, GameUserInput } from './features/game'
+import { Prompt } from './features/prompt'
+import { GameTimer } from './features/timer'
 
 function App() {
   return (
     <>
       <Prompt />
-      <UserInput />
+      <GameUserInput />
 
       <GameTimer />
 

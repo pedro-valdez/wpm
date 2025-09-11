@@ -1,23 +1,22 @@
 import { useAtom } from 'jotai'
 import { userInputAtom } from '../atoms'
-import { useGameTimer, useGameTimerControls } from '@/features/timer/hooks'
+import type { ComponentProps } from 'react'
 
-export function UserInput() {
+type UserInputProps = Omit<ComponentProps<'input'>, 'type' | 'value'>
+
+export function UserInput({ onChange, ...props }: UserInputProps) {
   const [userInput, setUserInput] = useAtom(userInputAtom)
-  const { isTimerRunning, isTimerFinished } = useGameTimer()
-  const { startTimer } = useGameTimerControls()
 
   return (
     <input
       type="text"
       value={userInput}
       onChange={(e) => {
-        if (!isTimerRunning) {
-          startTimer()
-        }
+        onChange?.(e)
+
         setUserInput(e.target.value)
       }}
-      disabled={isTimerFinished}
+      {...props}
     />
   )
 }
