@@ -2,18 +2,29 @@ import { cn } from '@/util'
 import { useGrade } from '../hooks'
 import { currentIndicesAtom } from '../atoms'
 import { useAtomValue } from 'jotai'
-import type { ComponentProps } from 'react'
+import { useEffect, type ComponentProps, type RefObject } from 'react'
 
-type PromptProps = ComponentProps<'p'>
+type PromptProps = ComponentProps<'p'> & {
+  currentWordRef?: RefObject<HTMLSpanElement | null>
+  onNextWord?: () => void
+}
 
-export function Prompt({ className, ...props }: PromptProps) {
+export function Prompt({ className, currentWordRef, onNextWord, ...props }: PromptProps) {
   const { currentWordIndex, currentLetterIndex } = useAtomValue(currentIndicesAtom)
   const grades = useGrade()
+
+  useEffect(() => {
+    onNextWord?.()
+  }, [currentWordIndex, onNextWord])
 
   return (
     <p className={cn('w-full max-w-full space-x-[1ch]', className)} {...props}>
       {grades.map((word, i) => (
-        <span key={i} className="inline-block">
+        <span
+          key={i}
+          className="inline-block"
+          ref={currentWordIndex === i ? currentWordRef : undefined}
+        >
           {word.map((letter, j) => {
             return (
               <span
