@@ -1,15 +1,10 @@
-import { GamePrompt, GameResetButton, GameResults } from './features/game'
-import { GameTimer } from './features/timer'
+import { Game, GameResults } from './features/game'
 
 function App() {
   return (
     <>
-      <GamePrompt />
-
-      <GameTimer className="absolute top-4 right-4" />
-
+      <Game />
       <GameResults />
-      <GameResetButton />
     </>
   )
 }
