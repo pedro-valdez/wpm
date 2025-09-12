@@ -33,8 +33,11 @@ export function Prompt({ className, currentWordRef, onNextWord, ...props }: Prom
                   letter.grade === false && 'text-error',
                   letter.grade === undefined && 'text-base-content/60',
                   currentWordIndex === i &&
-                    currentLetterIndex === j &&
-                    'bg-secondary text-secondary-content'
+                    currentLetterIndex === j && [
+                      'bg-secondary text-secondary-content',
+                      'group-has-[input:not(:focus)]:animate-pulse',
+                      'group-has-[input:not(:focus)]:bg-secondary/60',
+                    ]
                 )}
               >
                 {letter.overflow ? letter.value : letter.target}
