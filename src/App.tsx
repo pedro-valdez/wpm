@@ -6,7 +6,7 @@ function App() {
     <>
       <GamePrompt />
 
-      <GameTimer />
+      <GameTimer className="absolute top-4 right-4" />
 
       <GameResults />
       <GameResetButton />
