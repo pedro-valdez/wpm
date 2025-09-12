@@ -1,12 +1,25 @@
 import { Prompt } from '@/features/prompt/components/Prompt'
 import { GameUserInput } from './UserInput'
-import { useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { cn } from '@/util'
 
 export function GamePrompt() {
   const userInputRef = useRef<HTMLInputElement>(null)
   const wordRef = useRef<HTMLSpanElement>(null)
   const containerRef = useRef<HTMLParagraphElement>(null)
+
+  const carriageReturn = useCallback(() => {
+    if (wordRef.current && containerRef.current) {
+      const translation = `-${wordRef.current?.offsetTop}px`
+      containerRef.current.style = `transform: translateY(${translation})`
+    }
+  }, [])
+
+  useEffect(() => {
+    window.addEventListener('resize', carriageReturn)
+
+    return () => window.removeEventListener('resize', carriageReturn)
+  }, [carriageReturn])
 
   return (
     <div className="relative bg-base-100 h-screen w-full">
@@ -28,12 +41,7 @@ export function GamePrompt() {
           }}
           ref={containerRef}
           currentWordRef={wordRef}
-          onNextWord={() => {
-            if (wordRef.current && containerRef.current) {
-              const translation = `-${wordRef.current?.offsetTop}px`
-              containerRef.current.style = `transform: translateY(${translation})`
-            }
-          }}
+          onNextWord={() => carriageReturn()}
           className={cn('space-y-[1ch]')}
         />
       </div>
