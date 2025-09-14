@@ -26,14 +26,13 @@ export function GamePrompt() {
       <div
         className={cn(
           'absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2',
-          'w-[36ch] max-w-full px-2 sm:px-8 md:px-10 lg:px-12 xl:px-14 2xl:px-16',
-          'text-xl h-7',
-          'sm:text-4xl sm:h-10',
-          'md:text-5xl sm:h-12',
-          'lg:text-6xl lg:h-15',
-          'xl:text-7xl xl:h-18',
-          '2xl:text-8xl 2xl:h-24',
-          'border-b border-b-primary'
+          'w-[36ch] max-w-full border-b border-b-primary',
+          'text-xl h-7 px-2',
+          'sm:text-4xl sm:h-10 sm:px-8',
+          'md:text-5xl md:h-12 md:px-10',
+          'lg:text-6xl lg:h-15 lg:px-12',
+          'xl:text-7xl xl:h-18 xl:px-14',
+          '2xl:text-8xl 2xl:h-24 2xl:px-16'
         )}
       >
         <Prompt
