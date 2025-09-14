@@ -1,7 +1,7 @@
-import { Prompt } from '@/features/prompt/components/Prompt'
 import { GameUserInput } from './UserInput'
 import { useCallback, useEffect, useRef } from 'react'
 import { cn } from '@/util'
+import { Prompt } from '@/features/prompt/components'
 
 export function GamePrompt() {
   const userInputRef = useRef<HTMLInputElement>(null)

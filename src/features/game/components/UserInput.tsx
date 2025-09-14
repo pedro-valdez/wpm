@@ -1,4 +1,4 @@
-import { UserInput } from '@/features/prompt/components/UserInput'
+import { UserInput } from '@/features/prompt/components'
 import { useGameTimer, useGameTimerControls } from '@/features/timer/hooks'
 import type { ComponentProps } from 'react'
 

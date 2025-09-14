@@ -1,4 +1,4 @@
-import { GameTimer } from '@/features/timer'
+import { GameTimer } from '@/features/timer/components'
 import { GamePrompt } from './Prompt'
 import { GameResetButton } from './ResetButton'
 import { useGameTimer } from '@/features/timer/hooks'
