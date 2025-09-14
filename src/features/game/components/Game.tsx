@@ -1,12 +1,9 @@
 import { GameTimer } from '@/features/timer/components'
 import { GamePrompt } from './Prompt'
 import { GameResetButton } from './ResetButton'
-import { useGameTimer } from '@/features/timer/hooks'
 
 export function Game() {
-  const { isTimerFinished } = useGameTimer()
-
-  return !isTimerFinished ? (
+  return (
     <>
       <GamePrompt />
 
@@ -15,5 +12,5 @@ export function Game() {
         <GameTimer />
       </div>
     </>
-  ) : undefined
+  )
 }

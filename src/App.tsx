@@ -1,12 +1,7 @@
-import { Game, GameResults } from './features/game'
+import { GamePage } from './features/game'
 
 function App() {
-  return (
-    <>
-      <Game />
-      <GameResults />
-    </>
-  )
+  return <GamePage />
 }
 
 export default App

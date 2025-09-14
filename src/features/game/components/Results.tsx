@@ -1,10 +1,8 @@
-import { useGameTimer } from '@/features/timer/hooks'
 import { GameResetButton } from './ResetButton'
 import { useResults } from '../hooks'
 
 export function GameResults() {
   const { rawWpm, characterCount, correctCharacterCount, accuracy, wpm } = useResults()
-  const { isTimerFinished } = useGameTimer()
 
   /*
    * NOTE: The character counts DO NOT include spcaes.
@@ -12,7 +10,7 @@ export function GameResults() {
    * accuracy, and spaces factor out of the accuracy calculation.
    */
 
-  return isTimerFinished ? (
+  return (
     <div className="h-screen w-screen flex items-center justify-center">
       <div className="container px-4 sm:px-6 md:px-8 md:max-w-3xl">
         <h1 className="text-xl font-bold underline mb-2">Results</h1>
@@ -44,5 +42,5 @@ export function GameResults() {
         </div>
       </div>
     </div>
-  ) : undefined
+  )
 }
