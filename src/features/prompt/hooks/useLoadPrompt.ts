@@ -3,9 +3,10 @@ import { capitalizationAtom, promptAtom, punctuationAtom } from '../atoms'
 import { useSetAtom } from 'jotai'
 import { generate } from 'random-words'
 import { useAtomValue } from 'jotai'
-import { capitalize } from 'lodash'
+import { capitalize, some } from 'lodash'
 
-const PUNCTUATIONS = ['.', ',', ';', '!', '?'] as const
+const CAPITALIZE_PUNCTUATIONS = ['.', '!', '?'] as const
+const PUNCTUATIONS = [...CAPITALIZE_PUNCTUATIONS, ',', ';'] as const
 const PUNCTUATION_DENSITY = 0.2
 
 const CAPITALIZATION_DENSITY = 0.2
@@ -27,7 +28,20 @@ export function useLoadPrompt() {
       })
     }
 
-    if (capitalization) {
+    if (capitalization && punctuation) {
+      words = words.map((word, index) => {
+        if (index === 0) {
+          return capitalize(word)
+        }
+        // NOTE: The check is not necessary, but just in case...
+        const previousWord = index === 0 ? '' : words[index - 1]
+        const previousIsPunctuation = some(CAPITALIZE_PUNCTUATIONS, (punc) =>
+          previousWord.endsWith(punc)
+        )
+
+        return previousIsPunctuation ? capitalize(word) : word
+      })
+    } else if (capitalization) {
       words = words.map((word) =>
         Math.random() <= CAPITALIZATION_DENSITY ? capitalize(word) : word
       )
