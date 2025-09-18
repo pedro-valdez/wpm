@@ -54,9 +54,9 @@ export const ThemeDropdown = memo(function () {
 
   return (
     <details className="dropdown">
-      <summary className="btn btn-soft mb-2.5">Theme</summary>
+      <summary className="btn btn-soft">Theme</summary>
 
-      <ul className="menu dropdown-content bg-base-300 rounded-box">
+      <ul className="menu dropdown-content bg-base-300 rounded-box mt-2.5">
         <div className="h-32 overflow-y-scroll">
           {themes.map((val) => (
             <li key={val}>

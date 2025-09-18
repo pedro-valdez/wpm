@@ -1,7 +1,8 @@
 import { atom } from 'jotai'
-import { generate } from 'random-words'
+import { atomWithStorage } from 'jotai/utils'
 
-export const promptAtom = atom(generate(100) as string[])
+// NOTE: is lazily loaded by `Prompt`
+export const promptAtom = atom<string[]>([])
 export const userInputAtom = atom('')
 export const userWordsAtom = atom((get) => {
   const userInput = get(userInputAtom)
@@ -14,3 +15,5 @@ export const currentIndicesAtom = atom((get) => {
 
   return { currentWordIndex, currentLetterIndex }
 })
+
+export const punctuationAtom = atomWithStorage('punctuation', true, undefined, { getOnInit: true })
