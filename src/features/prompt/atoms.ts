@@ -20,4 +20,4 @@ export const punctuationAtom = atomWithStorage('punctuation', false, undefined, 
 export const capitalizationAtom = atomWithStorage('capitalization', false, undefined, {
   getOnInit: true,
 })
-export const numbersAtom = atomWithStorage('numbers', true, undefined, { getOnInit: true })
+export const numbersAtom = atomWithStorage('numbers', false, undefined, { getOnInit: true })
