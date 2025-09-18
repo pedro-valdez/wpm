@@ -45,7 +45,7 @@ export function ThemeDropdown() {
 
   return (
     <details className="dropdown">
-      <summary className="btn btn-sm btn-soft mb-1">Theme</summary>
+      <summary className="btn btn-soft mb-2.5">Theme</summary>
 
       <ul className="menu dropdown-content bg-base-300 rounded-box">
         <div className="h-32 overflow-y-scroll">

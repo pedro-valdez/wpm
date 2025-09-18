@@ -10,7 +10,7 @@ export function ThemeInput({ value, className, ...props }: ThemeInputProps) {
     <input
       type="radio"
       name="theme-dropdown"
-      className={cn('btn btn-sm btn-block btn-ghost justify-start capitalize', className)}
+      className={cn('btn btn-block btn-ghost justify-start capitalize', className)}
       aria-label={value}
       value={value}
       {...props}
