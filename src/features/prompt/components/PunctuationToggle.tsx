@@ -5,8 +5,8 @@ export function PunctuationToggle() {
   const [punctuation, setPunctuation] = useAtom(punctuationAtom)
 
   return (
-    <label className="label">
-      Punctuation
+    <label className="label space-x-1">
+      <span>Punctuation</span>
       <input
         type="checkbox"
         checked={punctuation}
