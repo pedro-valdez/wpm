@@ -24,7 +24,7 @@ export function TimerDurationDropdown({
 
       <ul className="dropdown-content menu bg-base-300 rounded-box">
         {TIMER_DURATIONS.map((duration) => (
-          <li>
+          <li key={duration}>
             <input
               type="radio"
               name="timer-duration"
