@@ -1,4 +1,4 @@
-import { useAtom, useAtomValue, useSetAtom } from 'jotai'
+import { useAtom, useSetAtom } from 'jotai'
 import { createRef, useCallback, useEffect } from 'react'
 import {
   elapsedTimeAtom,
@@ -14,7 +14,7 @@ export function useGameTimerControls() {
   const [elapsedTime, setElapsedTime] = useAtom(elapsedTimeAtom)
   const [isTimerRunning, setIsTimerRunning] = useAtom(isTimerRunningAtom)
   const setIsTimerFinished = useSetAtom(isTimerFinishedAtom)
-  const timerDuration = useAtomValue(timerDurationAtom)
+  const [timerDuration, setTimerDuration] = useAtom(timerDurationAtom)
 
   const delay = 16
 
@@ -69,5 +69,5 @@ export function useGameTimerControls() {
     }
   }, [])
 
-  return { startTimer, stopTimer, resetTimer }
+  return { startTimer, stopTimer, resetTimer, setTimerDuration }
 }
