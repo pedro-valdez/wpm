@@ -1,6 +1,7 @@
 import { useAtom } from 'jotai'
 import { ThemeInput } from './Input'
 import { themeAtom } from '../atoms'
+import { memo } from 'react'
 
 const themes = [
   'light',
@@ -40,7 +41,15 @@ const themes = [
   'silk',
 ] as const
 
-export function ThemeDropdown() {
+/*
+ * NOTE: Why memo?
+ * This component has a sibling `GameTimer` which is updated
+ * every few milliseconds. The siblings of `GameTimer` are
+ * committed to a re-render if unstable. React doesn't
+ * directly know about Jotai, so every commit this component
+ * is considered for a re-render. Memo prevents this.
+ */
+export const ThemeDropdown = memo(function () {
   const [theme, setTheme] = useAtom(themeAtom)
 
   return (
@@ -62,4 +71,4 @@ export function ThemeDropdown() {
       </ul>
     </details>
   )
-}
+})
