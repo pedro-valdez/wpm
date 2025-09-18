@@ -2,8 +2,11 @@ import { GameUserInput } from './UserInput'
 import { useCallback, useEffect, useRef } from 'react'
 import { cn } from '@/util'
 import { Prompt } from '@/features/prompt/components'
+import { useAtomValue } from 'jotai'
+import { promptAtom } from '@/features/prompt/atoms'
 
 export function GamePrompt() {
+  const prompt = useAtomValue(promptAtom)
   const userInputRef = useRef<HTMLInputElement>(null)
   const wordRef = useRef<HTMLSpanElement>(null)
   const containerRef = useRef<HTMLParagraphElement>(null)
@@ -20,6 +23,8 @@ export function GamePrompt() {
 
     return () => window.removeEventListener('resize', carriageReturn)
   }, [carriageReturn])
+
+  useEffect(() => carriageReturn(), [prompt, carriageReturn])
 
   return (
     <div className="group relative bg-base-100 h-screen w-full overflow-y-hidden">
