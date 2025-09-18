@@ -1,12 +1,12 @@
 import { GameTimer } from '@/features/timer/components'
 import { GamePrompt } from './Prompt'
 import { GameResetButton } from './ResetButton'
-import { ThemeDropdown } from '@/features/theme'
 import {
   CapitalizationToggle,
   NumbersToggle,
   PunctuationToggle,
 } from '@/features/prompt/components'
+import { ThemeMenu } from '@/features/theme'
 
 export function Game() {
   return (
@@ -14,7 +14,7 @@ export function Game() {
       <GamePrompt />
 
       <div className="absolute top-4 left-4 flex items-center gap-x-4">
-        <ThemeDropdown />
+        <ThemeMenu />
         <PunctuationToggle />
         <CapitalizationToggle />
         <NumbersToggle />

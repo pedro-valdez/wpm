@@ -1,18 +1,15 @@
 import { useAtom } from 'jotai'
 import { capitalizationAtom } from '../atoms'
+import { Toggle } from '@/shared/components'
 
 export function CapitalizationToggle() {
   const [capitalization, setCapitalization] = useAtom(capitalizationAtom)
 
   return (
-    <label className="label space-x-1">
-      <span>Capitalization</span>
-      <input
-        type="checkbox"
-        checked={capitalization}
-        onChange={() => setCapitalization((prev) => !prev)}
-        className="toggle"
-      />
-    </label>
+    <Toggle
+      labelText="Capitalization"
+      checked={capitalization}
+      onChange={() => setCapitalization((prev) => !prev)}
+    />
   )
 }

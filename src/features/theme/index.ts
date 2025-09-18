@@ -1,1 +1,1 @@
-export { ThemeDropdown } from './components/Dropdown'
+export { ThemeMenu } from './components/Menu'
