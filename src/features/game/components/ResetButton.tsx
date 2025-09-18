@@ -16,7 +16,7 @@ export function GameResetButton({
 
   return (
     <button
-      className={cn('btn btn-sm btn-soft', className)}
+      className={cn('btn btn-soft', className)}
       onClick={(e) => {
         onClick?.(e)
         resetGame()
