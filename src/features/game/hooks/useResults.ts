@@ -7,9 +7,9 @@ export function useResults() {
   const userInput = useAtomValue(userInputAtom)
   const userWords = useAtomValue(userWordsAtom)
   const grades = useGrade()
-  const { elapsedTime } = useGameTimer()
+  const { timerDuration } = useGameTimer()
 
-  const rawWpm = elapsedTime !== 0 ? userInput.length / (5 * (elapsedTime / 60_000)) : 0
+  const rawWpm = timerDuration !== 0 ? userInput.length / (5 * (timerDuration / 60_000)) : 0
   const correctCharacterCount = grades.reduce(
     (acc, cur) => acc + cur.filter((v) => v.grade).length,
     0
