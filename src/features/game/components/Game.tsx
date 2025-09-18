@@ -2,7 +2,11 @@ import { GameTimer } from '@/features/timer/components'
 import { GamePrompt } from './Prompt'
 import { GameResetButton } from './ResetButton'
 import { ThemeDropdown } from '@/features/theme'
-import { CapitalizationToggle, PunctuationToggle } from '@/features/prompt/components'
+import {
+  CapitalizationToggle,
+  NumbersToggle,
+  PunctuationToggle,
+} from '@/features/prompt/components'
 
 export function Game() {
   return (
@@ -13,6 +17,7 @@ export function Game() {
         <ThemeDropdown />
         <PunctuationToggle />
         <CapitalizationToggle />
+        <NumbersToggle />
       </div>
 
       <div className="absolute top-4 right-4 flex items-center gap-x-4">

@@ -17,6 +17,7 @@ export const currentIndicesAtom = atom((get) => {
 })
 
 export const punctuationAtom = atomWithStorage('punctuation', false, undefined, { getOnInit: true })
-export const capitalizationAtom = atomWithStorage('capitalization', true, undefined, {
+export const capitalizationAtom = atomWithStorage('capitalization', false, undefined, {
   getOnInit: true,
 })
+export const numbersAtom = atomWithStorage('numbers', false, undefined, { getOnInit: true })
