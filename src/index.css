@@ -1,11 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
 @import 'tailwindcss';
 @plugin "daisyui" {
+  exclude: rootscrollgutter;
   themes: all;
 }
 
 @theme {
   --font-inconsolata: 'Inconsolata', monospace;
+}
+
+@utility no-scrollbar {
+  @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
 }
 
 body {

@@ -1,4 +1,4 @@
-import { useAtom, useAtomValue, useSetAtom } from 'jotai'
+import { useAtom, useSetAtom } from 'jotai'
 import { createRef, useCallback, useEffect } from 'react'
 import {
   elapsedTimeAtom,
@@ -11,10 +11,10 @@ const startTimeRef = createRef<number | null>()
 const intervalRef = createRef<ReturnType<typeof setInterval> | null>()
 
 export function useGameTimerControls() {
-  const [elapsedTime, setElapsedTime] = useAtom(elapsedTimeAtom)
+  const setElapsedTime = useSetAtom(elapsedTimeAtom)
   const [isTimerRunning, setIsTimerRunning] = useAtom(isTimerRunningAtom)
   const setIsTimerFinished = useSetAtom(isTimerFinishedAtom)
-  const timerDuration = useAtomValue(timerDurationAtom)
+  const [timerDuration, setTimerDuration] = useAtom(timerDurationAtom)
 
   const delay = 16
 
@@ -33,7 +33,7 @@ export function useGameTimerControls() {
   }, [setIsTimerFinished, setIsTimerRunning])
 
   const startTimer = useCallback(() => {
-    if (isTimerRunning || elapsedTime !== 0) return
+    if (isTimerRunning) return
 
     setIsTimerRunning(true)
     startTimeRef.current = performance.now()
@@ -50,7 +50,7 @@ export function useGameTimerControls() {
         }
       }
     }, delay)
-  }, [isTimerRunning, elapsedTime, timerDuration, setElapsedTime, setIsTimerRunning, stopTimer])
+  }, [isTimerRunning, timerDuration, setElapsedTime, setIsTimerRunning, stopTimer])
 
   const resetTimer = useCallback(() => {
     if (intervalRef.current) {
@@ -69,5 +69,5 @@ export function useGameTimerControls() {
     }
   }, [])
 
-  return { startTimer, stopTimer, resetTimer }
+  return { startTimer, stopTimer, resetTimer, setTimerDuration }
 }

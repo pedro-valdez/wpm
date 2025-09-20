@@ -1,8 +1,9 @@
 import { cn } from '@/util'
-import { useGrade } from '../hooks'
-import { currentIndicesAtom } from '../atoms'
+import { useGrade, useLoadPrompt } from '../hooks'
+import { currentIndicesAtom, promptAtom } from '../atoms'
 import { useAtomValue } from 'jotai'
 import { useEffect, type ComponentProps, type RefObject } from 'react'
+import { isEmpty } from 'lodash'
 
 type PromptProps = ComponentProps<'p'> & {
   currentWordRef?: RefObject<HTMLSpanElement | null>
@@ -10,8 +11,16 @@ type PromptProps = ComponentProps<'p'> & {
 }
 
 export function Prompt({ className, currentWordRef, onNextWord, ...props }: PromptProps) {
+  const prompt = useAtomValue(promptAtom)
+  const loadPrompt = useLoadPrompt()
   const { currentWordIndex, currentLetterIndex } = useAtomValue(currentIndicesAtom)
   const grades = useGrade()
+
+  useEffect(() => {
+    if (isEmpty(prompt)) {
+      loadPrompt()
+    }
+  }, [prompt, loadPrompt])
 
   useEffect(() => {
     onNextWord?.()
