@@ -1,5 +1,5 @@
 import { useAtom } from 'jotai'
-import { useRef } from 'react'
+import { memo, useRef } from 'react'
 import { FaPalette } from 'react-icons/fa'
 import { themeAtom } from '../atoms'
 import { ThemeColor } from './Color'
@@ -42,7 +42,7 @@ const themes = [
   'silk',
 ] as const
 
-export function ThemeSettings() {
+export const ThemeSettings = memo(function () {
   const [theme, setTheme] = useAtom(themeAtom)
   const themeModal = useRef<HTMLDialogElement>(null)
 
@@ -85,4 +85,4 @@ export function ThemeSettings() {
       </dialog>
     </>
   )
-}
+})

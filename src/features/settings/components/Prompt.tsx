@@ -1,8 +1,9 @@
 import { HiCog6Tooth } from 'react-icons/hi2'
 import { cn } from '@/util'
 import { CapitalizationToggle, NumbersToggle, PunctuationToggle } from '@/features/prompt'
+import { memo } from 'react'
 
-export function PromptSettings() {
+export const PromptSettings = memo(function () {
   return (
     <div tabIndex={0} className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-circle btn-soft">
@@ -21,4 +22,4 @@ export function PromptSettings() {
       </div>
     </div>
   )
-}
+})
