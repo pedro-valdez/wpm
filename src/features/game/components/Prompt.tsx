@@ -27,7 +27,7 @@ export function GamePrompt() {
   useEffect(() => carriageReturn(), [prompt, carriageReturn])
 
   return (
-    <div className="group relative bg-base-100 h-screen w-full overflow-y-hidden">
+    <div className="group relative bg-base-100 h-dvh w-full overflow-y-hidden">
       <div
         className={cn(
           'absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2',
@@ -50,7 +50,13 @@ export function GamePrompt() {
           className={cn('space-y-[1ch]')}
         />
       </div>
-      <GameUserInput ref={userInputRef} className="absolute top-0 left-0 -z-10" />
+      <GameUserInput
+        ref={userInputRef}
+        className={cn(
+          'absolute top-0 left-0 -z-10 caret-transparent',
+          'w-px h-px p-0 -m-px border-0 overflow-hidden [clip:rect(0,0,0,0)]'
+        )}
+      />
     </div>
   )
 }
