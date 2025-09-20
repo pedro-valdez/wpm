@@ -19,7 +19,7 @@ export function useLoadPrompt() {
   const setPrompt = useSetAtom(promptAtom)
 
   const loadPrompt = useCallback(() => {
-    let words = generate(100) as string[]
+    let words = generate(5000) as string[]
 
     if (punctuation) {
       words = words.map((word) => {
