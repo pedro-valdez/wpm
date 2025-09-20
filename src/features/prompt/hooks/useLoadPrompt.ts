@@ -21,6 +21,7 @@ export function useLoadPrompt() {
   const loadPrompt = useCallback(() => {
     let words = generate(500) as string[]
 
+
     if (punctuation) {
       words = words.map((word) => {
         const pIndex = Math.floor(Math.random() * PUNCTUATIONS.length)
