@@ -42,13 +42,13 @@ const themes = [
   'silk',
 ] as const
 
-export function ThemeMenu() {
+export function ThemeSettings() {
   const [theme, setTheme] = useAtom(themeAtom)
   const themeModal = useRef<HTMLDialogElement>(null)
 
   return (
     <>
-      <button className="btn btn-ghost btn-circle" onClick={() => themeModal.current?.showModal()}>
+      <button className="btn btn-soft btn-circle" onClick={() => themeModal.current?.showModal()}>
         <FaPalette />
       </button>
       <dialog ref={themeModal} className="modal">

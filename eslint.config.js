@@ -29,7 +29,7 @@ export default tseslint.config([
         {
           patterns: [
             {
-              group: ['@/features/**/*', '!@/features/*/index.ts'],
+              group: ['@/features/**/*', '!@/features/*', '!@/features/*/index.ts'],
               message: 'Cross-feature imports restricted.',
             },
           ],
